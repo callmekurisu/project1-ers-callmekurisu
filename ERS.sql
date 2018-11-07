@@ -81,5 +81,9 @@ INSERT INTO ers.ers_users
 (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
 VALUES(2, 'jdepp', 'password321', 'jonny', 'depp', 'jdepp@gmail.com', 2);
 
-SELECT (MAX(ers_users_id)+1) AS nextid FROM ers_users;
+INSERT INTO ers.reimbursement
+(reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)
+VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
+
+SELECT * FROM REIMBURSEMENT;
 
