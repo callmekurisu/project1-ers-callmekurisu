@@ -1,5 +1,6 @@
 body {
-    padding-top: 90px;
+	padding-top: 20px;
+
 }
 .panel-login {
 	border-color: #ccc;
@@ -17,14 +18,14 @@ body {
 	text-decoration: none;
 	color: #666;
 	font-weight: bold;
-	font-size: 15px;
+	font-size: 25px;
 	-webkit-transition: all 0.1s linear;
 	-moz-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
 .panel-login>.panel-heading a.active{
 	color: #029f5b;
-	font-size: 18px;
+	font-size: 25px;
 }
 .panel-login>.panel-heading hr{
 	margin-top: 10px;
@@ -99,6 +100,9 @@ body {
 }
 
 #logo{
-    width: 250px;
-    margin-left: 50px;
+	width: 150px;
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
 }
