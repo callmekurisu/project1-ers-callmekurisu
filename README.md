@@ -12,6 +12,8 @@
     - User
     - Reimbursement
 * Service Layer (done)
+    - User
+    - Reimbursement
 * <b>Front Controller (in progress)</b>
     - User Controller
     - Reimb Controller
