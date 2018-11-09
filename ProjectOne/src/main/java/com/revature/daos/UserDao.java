@@ -2,6 +2,7 @@ package com.revature.daos;
 
 import java.util.List;
 
+import com.revature.models.UserRole;
 import com.revature.models.Users;
 
 
@@ -15,4 +16,8 @@ public interface UserDao {
 	int save(Users u);
 	
 	int nextId();
+
+	Users findByUsernameAndPassword(String username, String password);
+
+	Users findById(int id);
 }

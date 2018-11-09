@@ -7,11 +7,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
+import com.revature.models.UserRole;
 import com.revature.models.Users;
 import com.revature.util.ConnectionUtil;
 import com.revature.util.HashingUtil;
 
 public class UserDaoJdbc implements UserDao{
+
+	
+	private Logger log = Logger.getRootLogger();
 
 	@Override
 	public List<Users> findAll() {
@@ -25,7 +31,7 @@ public class UserDaoJdbc implements UserDao{
 			
 			List<Users> users = new ArrayList<>(); 
 				while(rs.next()){
-					users.add(new Users((rs.getInt("ers_users_id")),(rs.getString("ers_username")),(rs.getString("ers_password")), (rs.getString("user_first_name")), rs.getString("user_last_name"), rs.getString("user_email"), rs.getInt("user_role_id")));
+					users.add(new Users((rs.getInt("ers_users_id")),(rs.getString("ers_username")),(rs.getString("ers_password")), (rs.getString("user_first_name")), rs.getString("user_last_name"), rs.getString("user_email"), rs.getInt("user_role_id"),null));
 					}
 				return users;
 		} catch (SQLException e) {
@@ -77,5 +83,45 @@ public class UserDaoJdbc implements UserDao{
 			e.printStackTrace();
 		}
 		return 0;
+	}
+
+	@Override
+	public Users findByUsernameAndPassword(String username, String password) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(
+					"SELECT * FROM ers_users INNER JOIN user_roles"
+					+ "ON (ers_users.user_role_id = user_roles.ers_user_role_id) "
+					+ "WHERE username = ?  AND pass = ?");
+			ps.setString(1, username);
+			ps.setString(2, password);//needs to match hash
+			ResultSet rs = ps.executeQuery();
+			if (rs.next()) {
+				//return extractFromResultSet(rs);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	@Override
+	public Users findById(int id) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(
+					"SELECT ers_users_id, ers_username, ers_user_role_id, user_role FROM ers_users\n" + 
+					"INNER JOIN user_roles ON ers_users.user_role_id=user_roles.ers_user_role_id "
+					+ "WHERE ers_users_id=?");
+			ps.setInt(1, id);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()) {
+				return new Users(rs.getInt("ers_users_id"), rs.getString("ers_username"), 
+						new UserRole(rs.getInt("ers_user_role_id"),rs.getString("user_role")));
+			}
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

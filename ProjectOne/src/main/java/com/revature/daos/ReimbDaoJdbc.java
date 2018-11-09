@@ -28,7 +28,7 @@ public class ReimbDaoJdbc implements ReimbDao {
 			
 			List<Reimb> reimbs = new ArrayList<>(); 
 				while(rs.next()){
-					reimbs.add(new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), false, rs.getInt("reimb_author"), rs.getInt("reimb_resolver"), rs.getInt("reimb_status_id"), rs.getInt("reimb_type_id")));
+					reimbs.add(new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"),false, rs.getInt("reimb_author"), rs.getInt("reimb_resolver"), rs.getInt("reimb_status_id"), rs.getInt("reimb_type_id")));
 					}
 				return reimbs;
 		} catch (SQLException e) {
@@ -82,6 +82,17 @@ public class ReimbDaoJdbc implements ReimbDao {
 	
 	}
 
-	
+	@Override
+	public Users findById(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Users findByUsernameAndPassword(String username, String password) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 		
 }

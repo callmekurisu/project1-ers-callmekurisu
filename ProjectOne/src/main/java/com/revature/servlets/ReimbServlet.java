@@ -53,7 +53,7 @@ private ReimbService rd = ReimbService.currentImplementation;
 		ObjectMapper om = new ObjectMapper();
 		Reimb r = om.readValue(req.getReader(), Reimb.class);
 		rd.save(r);
-		System.out.println("Saving:" + "from user id: "r.getAuthor());
+		System.out.println("Saving request from user id: " + r.getAuthor());
 		
 		res.setStatus(201);
 		System.out.println("reimb_id: " + (rd.nextId()-1) + " saved successfully");

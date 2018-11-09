@@ -1,7 +1,5 @@
 package com.revature.models;
 
-import java.util.List;
-
 public class Users {
 
 	private int userId;
@@ -11,7 +9,7 @@ public class Users {
 	private String lastName;
 	private String email;
 	private int userRoleId;
-	
+	private UserRole role;
 
 	public Users() {
 		super();
@@ -19,7 +17,7 @@ public class Users {
 	}
 
 	public Users(int userId, String username, String password, String firstName, String lastName, String email,
-			int userRoleId) {
+			int userRoleId, UserRole role) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -28,6 +26,13 @@ public class Users {
 		this.lastName = lastName;
 		this.email = email;
 		this.userRoleId = userRoleId;
+		this.role = role;
+	}
+	
+	public Users(int userId, String username, UserRole role) {
+		this.userId = userId;
+		this.username = username;
+		this.role = role;
 	}
 
 	public int getUserId() {
@@ -87,14 +92,21 @@ public class Users {
 	}
 	
 
+	public UserRole getRole() {
+		return role;
+	}
+
+	public void setRole(UserRole role) {
+		this.role = role;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Users [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
 				+ firstName + ", lastName=" + lastName + ", email=" + email + ", userRoleId=" + userRoleId
 				+ ", allUsers="  + "]";
 	}
-	
-	
 	
 	
 }

@@ -2,7 +2,11 @@ package com.revature.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import com.revature.daos.UserDao;
+import com.revature.dto.Credential;
+import com.revature.models.UserRole;
 import com.revature.models.Users;
 
 public class UserServiceImpl implements UserService{
@@ -25,6 +29,19 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		return ud.nextId();
 	}
+	@Override
+	public Users findById(int id) {
+		return ud.findById(id);
+	}
 
+	@Override
+	public boolean login(Credential cred, HttpSession session) {
+		Users u = ud.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
+		if (u != null) {
+			session.setAttribute("role", u.getRole().getName());
+			return true;
+		} 
+		return false;
+	}
 	
 }

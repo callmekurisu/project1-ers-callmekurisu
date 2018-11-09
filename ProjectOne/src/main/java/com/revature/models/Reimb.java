@@ -20,13 +20,14 @@ public class Reimb {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Reimb(int reimbId, double amount, Timestamp submitted, Timestamp resolved, boolean reciept, int author,
+	public Reimb(int reimbId, double amount, Timestamp submitted, Timestamp resolved, String description, boolean reciept, int author,
 			int resolver, int status, int type) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
+		this.description = description;
 		this.reciept = reciept;
 		this.author = author;
 		this.resolver = resolver;
@@ -34,6 +35,7 @@ public class Reimb {
 		this.type = type;
 	}
 
+	
 	public int getReimbId() {
 		return reimbId;
 	}
@@ -61,6 +63,15 @@ public class Reimb {
 	public Timestamp getResolved() {
 		return resolved;
 	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 
 	public void setResolved(Timestamp resolved) {
 		this.resolved = resolved;
@@ -113,13 +124,6 @@ public class Reimb {
 				+ status + ", type=" + type + "]";
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 	
 	
 }
