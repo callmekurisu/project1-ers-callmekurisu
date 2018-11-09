@@ -5,23 +5,24 @@
 * PostgreSQL database (done)
     - tables
     - initialization
-* Models
+* Models (done)
     - User
     - Reimbursement
-* DAOs 
+* DAOs (done)
     - User
     - Reimbursement
-* Service Layer
-* Front Controller
-    - servlets
-    - refactoring
+* Service Layer (done)
+* <b>Front Controller (in progress)</b>
+    - User Controller
+    - Reimb Controller
 * Utils 
     - connection
     - hashing
+    - Timestamp
     - auth 
 * Client side
     - html, css, js
     - Login
     - Registration
     - User/Manger Dashboads
-    - ReactJS refactoring
+    - ReactJS refactoring </b>
