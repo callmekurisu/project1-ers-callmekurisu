@@ -14,14 +14,14 @@
 * Service Layer (done)
     - User
     - Reimbursement
-* <b>Front Controller (in progress)</b>
-    - User Controller
-    - Reimb Controller
-* Utils 
+* Utils (done) 
     - connection
     - hashing
     - Timestamp
     - auth 
+* <b>Front Controller (in progress)</b>
+    - User Controller
+    - Reimb Controller
 * Client side
     - html, css, js
     - Login
