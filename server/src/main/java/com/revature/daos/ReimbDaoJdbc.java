@@ -16,28 +16,7 @@ import com.revature.util.TsUtil;
 
 public class ReimbDaoJdbc implements ReimbDao {
 
-	@Override
-	public List<Reimb> findAll() {
-		try (Connection conn = ConnectionUtil.getConnection()) {
-			PreparedStatement ps = conn.prepareStatement(
-				"SELECT * FROM reimbursement " 
-				 
-			);
-			
-			ResultSet rs =  ps.executeQuery();
-			
-			List<Reimb> reimbs = new ArrayList<>(); 
-				while(rs.next()){
-					reimbs.add(new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"),false, rs.getInt("reimb_author"), rs.getInt("reimb_resolver"), rs.getInt("reimb_status_id"), rs.getInt("reimb_type_id"), null, null));
-					}
-				return reimbs;
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return null;
-	}
-
+	
 		@Override
 	public int nextId() {
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -83,15 +62,23 @@ public class ReimbDaoJdbc implements ReimbDao {
 	}
 
 	@Override
-	public Users findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Users findByUsernameAndPassword(String username, String password) {
-		// TODO Auto-generated method stub
-		return null;
+	public int update(int rId, int statusId) {
+		try (Connection conn = ConnectionUtil.getConnection()) {
+			PreparedStatement ps = conn.prepareStatement(
+				"UPDATE reimbursement SET reimb_resolved=?, reimb_status_id=? WHERE reimb_id=?"
+			);
+			
+			ps.setTimestamp(1, TsUtil.stampIt());//invoke time stamp utility when manager updates status
+			ps.setInt(2, statusId);//manager updates status id
+			ps.setInt(3, rId);
+			ps.executeUpdate();
+			
+			return nextId();//if all goes well the next id will return for new user creation
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return 0;
 	}
 
 		

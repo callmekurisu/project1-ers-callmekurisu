@@ -19,7 +19,7 @@ import com.revature.util.ResponseMapper;
 
 public class UserController {
 	private Logger log = Logger.getRootLogger();
-	private UserService ud = UserService.currentImplementation;
+	private UserService us = UserService.currentImplementation;
 	private ObjectMapper om = new ObjectMapper();
 
 	void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -47,14 +47,14 @@ public class UserController {
 		System.out.println(Arrays.toString(uriArray));
 		if (uriArray.length == 1) {
 			log.info("retreiving all users");
-			List<Users> users = ud.findAll();
+			List<Users> users = us.findAll();
 			ResponseMapper.convertAndAttach(users, resp);
 			return;
 		} else if (uriArray.length == 2) {
 			try {
 				int id = Integer.parseInt(uriArray[1]);
 				log.info("retreiving data for user id: " + id);
-				List<Users> user = ud.findById(id);
+				List<Users> user = us.findById(id);
 				ResponseMapper.convertAndAttach(user, resp);
 				return;
 			} catch (NumberFormatException e) {
@@ -73,21 +73,21 @@ public class UserController {
 		if ("users".equals(uri)) {
 			log.info("saving new user");
 			Users u = om.readValue(req.getReader(), Users.class);
-			ud.save(u);
+			us.save(u);
 			resp.getWriter().write("" + u.getUserId());
 			resp.setStatus(201);
 			return;
 		} else if ("users/login".equals(uri)) {
 			log.info("attempting to log in");
 			Credential cred = om.readValue(req.getReader(), Credential.class);
-			if(!ud.login(cred, req.getSession())) {
+			if(!us.login(cred, req.getSession())) {
 				resp.setStatus(403);
 			}
 		} else {
 			resp.setStatus(404);
 			return;
 		} 
-		
+		//not sure how to setup auth and session (T_T)
 //		  if{
 //			String role = (String) req.getSession().getAttribute("user_role");
 //			if (!"manager".equals(role)) {

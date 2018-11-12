@@ -50,7 +50,7 @@ public class UserDaoJdbc implements UserDao{
 			List<Users> users = new ArrayList<>(); 
 				while(rs.next()){
 					users.add(new Users((rs.getInt("ers_users_id")),(rs.getString("ers_username")),null, (rs.getString("user_first_name")), rs.getString("user_last_name"), rs.getString("user_email"), 0,null, 
-							new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), null, rs.getString("reimb_description"), false, 0, 0, 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
+							new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"), false, 0, 0, 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
 					}
 				return users;
 		} catch (SQLException e) {

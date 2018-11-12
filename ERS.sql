@@ -85,21 +85,4 @@ INSERT INTO ers.reimbursement
 (reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)
 VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
 
-SELECT 
-	ers_users_id,
-	ers_username,
-	user_first_name,
-	user_last_name,
-	user_email,
-	reimb_id,
-	reimb_amount,
-	reimb_submitted,
-	reimb_resolved, 
-	reimb_description,
-	reimb_status,
-	reimb_type
-FROM ERS_USERS
-LEFT JOIN REIMBURSEMENT ON ERS_USERS.ERS_USERS_ID = REIMBURSEMENT.REIMB_AUTHOR
-LEFT JOIN REIMBURSEMENT_STATUS ON REIMBURSEMENT.REIMB_STATUS_ID=REIMBURSEMENT_STATUS.REIMB_STATUS_ID
-LEFT JOIN REIMBURSEMENT_TYPE ON REIMBURSEMENT.REIMB_TYPE_ID = REIMBURSEMENT_TYPE.REIMB_TYPE_ID
-ORDER BY ERS_USERS_ID; 
+ 

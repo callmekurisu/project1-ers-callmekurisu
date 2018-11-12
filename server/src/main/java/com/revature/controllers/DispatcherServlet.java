@@ -13,7 +13,7 @@ public class DispatcherServlet extends HttpServlet{
 
 	private Logger log = Logger.getRootLogger();
 	private UserController uc = new UserController();
-	//private ChampionController cc = new ChampionController();
+	private ReimbController rc = new ReimbController();
 
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,7 +32,7 @@ public class DispatcherServlet extends HttpServlet{
 		if (uri.startsWith("users")) {
 			uc.process(req, resp);
 		} else if (uri.startsWith("reimbs")) {
-			//cc.process(req, resp);
+			rc.process(req, resp);
 		} else {
 			resp.setStatus(404);
 		}
