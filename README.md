@@ -19,12 +19,12 @@
     - hashing
     - Timestamp
     - auth 
-* <b>Front Controller (in progress)</b>
+* Front Controller (done)
     - User Controller
     - Reimb Controller
-* Client side
+* <b> Client side (in progress)</b>
     - html, css, js
     - Login
     - Registration
-    - User/Manger Dashboads
-    - ReactJS refactoring </b>
+    - User/Manger Dashboards
+    - React-Redux refactoring 
