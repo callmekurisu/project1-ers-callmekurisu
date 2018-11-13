@@ -1,26 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+//import { Provider } from 'react-redux'; save for refactoring
+
+import './Include/bootstrap';
 import './App.css';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import AppNav from './Components/Nav.component';
+import { HomeComponent } from './Components/Home/Home.component';
+import { SignInComponent } from './Components/SignIn.component.js/SignIn.component';
+import { RegisterComponent } from './Components/SignIn.component.js/Register.component';
+import { AboutComponent } from './About.component';
+
+//import { store } from './Redux/Store'; refactor later is possible
+
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      // <Provider store={store}>
+        <BrowserRouter>
+          <>
+            <AppNav />
+            <div id="main-content-container">
+              <Switch>
+                <Route path="/home" component={HomeComponent} />
+                <Route path="/sign-in" component={SignInComponent} />
+                {/* <Route path="/session" component={RegisterComponent} /> */}
+                <Route path="/register" component={RegisterComponent} />
+                <Route path="/about" component={AboutComponent} />
+                {/* default */}
+              </Switch>
+            </div>
+          </>
+        </BrowserRouter>
+      // </Provider >
     );
   }
 }
