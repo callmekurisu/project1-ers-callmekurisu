@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import ErsClient from '../../Axios/ErsClient';
 export class SignInComponent extends React.Component {
   constructor(props) {
@@ -31,11 +30,11 @@ export class SignInComponent extends React.Component {
     ErsClient.post('users/login', cred)
       .then(res => {
         if (res.status === 200){
-        this.props.history.push('/user');
+        this.props.history.push('/manager');
         }
       })
       .catch(err => {
-        window.location.assign('127.0.0.1/404')
+       window.location.assign('127.0.0.1/404')
         console.log(err);
       })
   }
@@ -50,7 +49,7 @@ export class SignInComponent extends React.Component {
               <div className="panel-heading">
                 <div className="row">
                   <div className="col-xs-6">
-                    <h6><strong>Login to Revature ERS</strong></h6>
+                    <h6><strong>Manager Login to Revature ERS</strong></h6>
                   </div>
                 </div>
                 <hr />
@@ -83,7 +82,7 @@ export class SignInComponent extends React.Component {
                       <div className="form-group">
                         <div className="row">
                           <div className="col-lg-12">
-                            <h6><Link to="/register"> New here? Register!</Link></h6>
+                           
                           </div>
                         </div>
                       </div>

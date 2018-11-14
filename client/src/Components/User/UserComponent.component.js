@@ -1,8 +1,6 @@
 import React from 'react';
 import ErsClient from '../../Axios/ErsClient';
 import time from '../../Include/time';
-import { FaCheckCircle } from 'react-icons/fa';
-import { FaRegTimesCircle } from 'react-icons/fa';
 
 export class UserComponent extends React.Component {
  constructor(props){
@@ -14,7 +12,7 @@ export class UserComponent extends React.Component {
  
  //watch out now! lexical this!
   componentDidMount(){
-    ErsClient.get('users/')
+    ErsClient.get('users/username')
       .then((response) => {
         console.log(`got ${response.data.length} reimbursements`)
         this.setState({reimbs: response.data })
@@ -53,12 +51,7 @@ export class UserComponent extends React.Component {
             <li  className="list-group-item flex-row-sb">Type: {info.request.typeString.toUpperCase()}</li>
             <li  className="list-group-item flex-row-sb">Status: {info.request.statusString.toUpperCase()}</li>
             <li className="list-group-item flex-row-sb">
-            <div id ="approval" container> 
-            <FaCheckCircle className='pointer' style={{color: "green"}} size={50}/>
-            </div>
-            <div>
-            <FaRegTimesCircle className='pointer' style={{color: "red"}} size={50}/>
-            </div>
+            
             </li>
             </ul>
             </div>

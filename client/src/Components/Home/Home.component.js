@@ -8,11 +8,17 @@ export class HomeComponent extends React.Component {
           <h1 ><strong>Revature  ERS</strong></h1>
           <h6 ><strong>Employee Reimbursement System</strong></h6>
         
-          <Link to="/sign-in" className="unset-anchor">
+        
           <img id="home-image" src={HomeImg} alt="Network, Connections, Communication, Digital, Internet"/>
-          </Link> 
+         
           <br/>
-          <h6 >Please sign-in to continue</h6>
+          <Link to="/manager-sign-in">
+          <h6 >Manager Portal</h6>
+          </Link>
+          <br /> 
+          <Link to="/employee-sign-in">
+          <h6 >Employee Portal</h6>
+          </Link>
         </div>
         
     )

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import RevLogo from '../Assets/rev-logo.png';
+import RevLogo from '../../Assets/rev-logo.png';
 
 export class AppNav extends React.PureComponent {
   render() {
@@ -23,7 +23,11 @@ export class AppNav extends React.PureComponent {
               </li>
               
               <li className="nav-item active">
-                <Link to="/sign-in" className="unset-anchor nav-link">Sign In</Link>
+                <Link to="/manager-sign-in" className="unset-anchor nav-link">Manager Sign In</Link>
+              </li>
+
+              <li className="nav-item active">
+                <Link to="/employee-sign-in" className="unset-anchor nav-link">Employee Sign In</Link>
               </li>
 
               <li className="nav-item active">

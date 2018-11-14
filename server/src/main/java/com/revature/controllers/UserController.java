@@ -46,9 +46,13 @@ public class UserController {
 		String[] uriArray = uri.split("/");
 		System.out.println(Arrays.toString(uriArray));
 		if (uriArray.length == 1) {
-			
+			//put the role and user id into array
+			//if manager login, they can get all data
+			//if employee get the id and pass into findby id method, voila!!!
 			String role = (String) req.getSession().getAttribute("role");
-			if ("manager".equals(role)) {
+			String[] roleArr = role.split("-");
+			log.info(Arrays.toString(roleArr));
+			if ("manager".equals(roleArr[0])) {
 				log.info("retreiving all user data");
 				List<Users> users = us.findAll();
 				ResponseMapper.convertAndAttach(users, resp);
@@ -59,7 +63,11 @@ public class UserController {
 			}
 		} else if (uriArray.length == 2) {
 			try {
-				int id = Integer.parseInt(uriArray[1]);
+				String role = (String) req.getSession().getAttribute("role");
+				String[] roleArr = role.split("-");
+				int userId = Integer.parseInt(roleArr[1]);
+				//int id = Integer.parseInt(uriArray[1]); postman testing
+				int id = userId;
 				log.info("retreiving data for user id: " + id);
 				List<Users> user = us.findById(id);
 				ResponseMapper.convertAndAttach(user, resp);

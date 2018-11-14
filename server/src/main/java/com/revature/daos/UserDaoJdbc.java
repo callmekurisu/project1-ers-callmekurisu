@@ -1,5 +1,6 @@
 package com.revature.daos;
 
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -90,7 +91,12 @@ public class UserDaoJdbc implements UserDao{
 			);
 			ps.setInt(1, nextId());//calling nextId() because user doesn't enter this
 			ps.setString(2, u.getUsername());//user entry
-			ps.setString(3, HashingUtil.hashword(u.getPassword()));//no more plaintext passwords, yay!
+			try {
+				ps.setString(3, HashingUtil.hashword(u.getPassword()));
+			} catch (NoSuchAlgorithmException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}//no more plaintext passwords, yay!
 			ps.setString(4, u.getFirstName());//user entry
 			ps.setString(5, u.getLastName());//user entry
 			ps.setString(6, u.getEmail());//user entry
@@ -113,7 +119,13 @@ public class UserDaoJdbc implements UserDao{
 					"INNER JOIN user_roles ON (ers_users.user_role_id = user_roles.ers_user_role_id) \n" + 
 					"WHERE ers_username = ? AND ers_password = ? ");
 			ps.setString(1, username);
-			ps.setString(2, HashingUtil.hashword(password));//needs to match hash
+			try {
+				ps.setString(2, HashingUtil.hashword(password));
+			} catch (NoSuchAlgorithmException e) {
+				
+				e.printStackTrace();
+			}
+			
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
 				return new Users(rs.getInt("ers_users_id"), rs.getString("ers_username"), rs.getString("ers_password"),

@@ -9,7 +9,7 @@ public class Reimb {
 	private Timestamp submitted;
 	private Timestamp resolved;
 	private String description;
-	private boolean reciept;
+	private boolean receipt;
 	private int author;
 	private int resolver;
 	private int status;
@@ -30,7 +30,7 @@ public class Reimb {
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		this.reciept = reciept;
+		this.receipt = reciept;
 		this.author = author;
 		this.resolver = resolver;
 		this.status = status;
@@ -82,11 +82,11 @@ public class Reimb {
 	}
 
 	public boolean isReciept() {
-		return reciept;
+		return receipt;
 	}
 
 	public void setReciept(boolean reciept) {
-		this.reciept = reciept;
+		this.receipt = reciept;
 	}
 
 	public int getAuthor() {
@@ -124,7 +124,7 @@ public class Reimb {
 	@Override
 	public String toString() {
 		return "Reimb [reimbId=" + reimbId + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
-				+ resolved + ", reciept=" + reciept + ", author=" + author + ", resolver=" + resolver + ", status="
+				+ resolved + ", reciept=" + receipt + ", author=" + author + ", resolver=" + resolver + ", status="
 				+ status + ", type=" + type + "]";
 	}
 

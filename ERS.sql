@@ -75,16 +75,15 @@ VALUES(1, 'lodging'),(2,'travel'),(3,'food'),(4,'other');
 --Initialize user table with manager and test account
 INSERT INTO ers.ers_users
 (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
-VALUES(1, 'nchristian', 'password123', 'nigel', 'christian', 'nchristian@gmail.com', 1);
-
+VALUES(1, 'nchristian', 'dfbcb73ed6874705af78bbb154c30662a81c8508245bf5fc7638e1d1f6393f63', 'nigel', 'christian', 'nchristian@gmail.com', 1);
+/* example of plaintext password. Don't do this*/
 INSERT INTO ers.ers_users
 (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
-VALUES(2, 'jdepp', 'password321', 'jonny', 'depp', 'jdepp@gmail.com', 2);
+VALUES(2, 'jdepp', '3993215d55e0595828ea9c70f526dd213540c7ff1d', 'jonny', 'depp', 'jdepp@gmail.com', 2);
 
 INSERT INTO ers.reimbursement
 (reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)
 VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
 
-SELECT * FROM ers_users 
-INNER JOIN user_roles ON (ers_users.user_role_id = user_roles.ers_user_role_id) 
-WHERE ers_username = 'nchristian'  AND ERS_PASSWORD = 'password123';
+SELECT * FROM ERS_USERS;
+UPDATE ERS_USERS SET ers_password='3993215d55e0595828ea9c70f526dd213540c7ff1d' WHERE ers_username='jdepp';

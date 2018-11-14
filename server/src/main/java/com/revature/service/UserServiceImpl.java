@@ -33,14 +33,14 @@ public class UserServiceImpl implements UserService{
 	public List<Users> findById(int id) {
 		return ud.findById(id);
 	}
-
+	//handle manager vs employee login logic here
+	//combine role with user id and get a string with both
 	@Override
 	public boolean login(Credential cred, HttpSession session) {
 		Users u = ud.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
-		if (u != null) {
-			session.setAttribute("role", u.getRole().getName());
-			session.setAttribute("id", u.getUserId());
-			return true;
+		if (u != null ) {
+			 session.setAttribute("role", u.getRole().getName()+"-"+u.getUserId());
+			 return true;
 		} 
 		return false;
 	}
