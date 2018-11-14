@@ -12,4 +12,6 @@ ReimbDao currentImplementation = new ReimbDaoJdbc();
 	int save(Reimb r);
 	//update a request
 	int update(int rId, int StatusId);
+	//get managers Id to pass into resolver
+	int findBoss();
 }

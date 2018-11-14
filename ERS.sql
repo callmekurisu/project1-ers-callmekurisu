@@ -85,4 +85,6 @@ INSERT INTO ers.reimbursement
 (reimb_id, reimb_amount, reimb_submitted, reimb_resolved, reimb_description, reimb_reciept, reimb_author, reimb_resolver, reimb_status_id, reimb_type_id)
 VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
 
- 
+SELECT * FROM ers_users 
+INNER JOIN user_roles ON (ers_users.user_role_id = user_roles.ers_user_role_id) 
+WHERE ers_username = 'nchristian'  AND ERS_PASSWORD = 'password123';

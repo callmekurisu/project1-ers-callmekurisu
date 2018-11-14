@@ -26,14 +26,36 @@ public class ReimbDaoJdbc implements ReimbDao {
 			
 			ResultSet rs =  ps.executeQuery();
 			rs.next();//need to iterate to get first (only row)
-			return rs.getInt(1); //get the value in column one (well...there's only one column lol)
+			return rs.getInt(1); //get the value in column one (well...there's only one column)
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
 	}
-	
+		//get the id of the manager to pass into reimbursements as resolver
+		//could be useful in the future when manager changes
+		@Override
+		public int findBoss() {
+			
+			try (Connection conn = ConnectionUtil.getConnection()) {
+				PreparedStatement ps = conn.prepareStatement(
+					"SELECT MIN(ers_users_id) as manager FROM ERS_USERS\n" + 
+					" LEFT JOIN USER_ROLES ON ERS_USERS.user_role_id = USER_ROLES.ers_user_role_id\n" + 
+					" WHERE USER_ROLES.user_role='manager'" 	 
+				);
+				
+				ResultSet rs =  ps.executeQuery();
+				rs.next();//need to iterate to get first (only row)
+				return rs.getInt(1); //get the value in column one (well...there's only one column)
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return 0;
+		}
+		
+		
 	@Override
 	public int save(Reimb r) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -47,7 +69,7 @@ public class ReimbDaoJdbc implements ReimbDao {
 			ps.setString(5, r.getDescription());
 			ps.setBoolean(6, false);//will go back and add receipt functionality
 			ps.setInt(7, r.getAuthor());
-			ps.setInt(8, r.getResolver());//null until manager review 
+			ps.setInt(8, findBoss());//pass in managers ID!
 			ps.setInt(9, 1);//status should always be one until updated by manager
 			ps.setInt(10, r.getType());
 			ps.executeUpdate();
@@ -60,7 +82,8 @@ public class ReimbDaoJdbc implements ReimbDao {
 		return 0;
 	
 	}
-
+	//forgot to update resolver
+	//create method to get manager id and pass it in
 	@Override
 	public int update(int rId, int statusId) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
@@ -80,6 +103,8 @@ public class ReimbDaoJdbc implements ReimbDao {
 		}
 		return 0;
 	}
+
+	
 
 		
 }

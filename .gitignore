@@ -2,6 +2,7 @@
 #Nigel Christian
 ### Linux ###
 *~
+/project1-ers-callmekurisu/client/node_modules/
 node_modules/
 # temporary files which can be created if a process still has a handle open of a deleted file
 .fuse_hidden*
@@ -24,5 +25,5 @@ node_modules/
 
 
 # End of https://www.gitignore.io/api/linux,visualstudiocode
-kurisu@kurisu-UX330UAK:~/Revature/project-0-callmekurisu$ 
+kurisu@kurisu-UX330UAK:~/Revature/project1-ers-callmekurisu$ 
 

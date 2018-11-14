@@ -46,10 +46,17 @@ public class UserController {
 		String[] uriArray = uri.split("/");
 		System.out.println(Arrays.toString(uriArray));
 		if (uriArray.length == 1) {
-			log.info("retreiving all users");
-			List<Users> users = us.findAll();
-			ResponseMapper.convertAndAttach(users, resp);
-			return;
+			
+			String role = (String) req.getSession().getAttribute("role");
+			if ("manager".equals(role)) {
+				log.info("retreiving all user data");
+				List<Users> users = us.findAll();
+				ResponseMapper.convertAndAttach(users, resp);
+				return;
+			} else {
+				log.info("access denied");
+				resp.setStatus(403);
+			}
 		} else if (uriArray.length == 2) {
 			try {
 				int id = Integer.parseInt(uriArray[1]);
@@ -68,6 +75,7 @@ public class UserController {
 
 	private void processPost(HttpServletRequest req, HttpServletResponse resp) throws JsonParseException, JsonMappingException, IOException {
 		String uri = req.getRequestURI();
+		
 		String context = "";
 		uri = uri.substring(context.length() + 1, uri.length());
 		if ("users".equals(uri)) {
@@ -82,23 +90,14 @@ public class UserController {
 			Credential cred = om.readValue(req.getReader(), Credential.class);
 			if(!us.login(cred, req.getSession())) {
 				resp.setStatus(403);
+				log.info("login unsuccessful");
+			} else if(us.login(cred, req.getSession())) {
+				log.info("login successful");
 			}
 		} else {
 			resp.setStatus(404);
 			return;
 		} 
-		//not sure how to setup auth and session (T_T)
-//		  if{
-//			String role = (String) req.getSession().getAttribute("user_role");
-//			if (!"manager".equals(role)) {
-//				resp.setStatus(403);
-//				return;
-//			} else {
-//				log.debug("could not recognize request with uri: " + uri);
-//				resp.setStatus(404);
-//				return;	
-//				
-//			}
-//		}
+		
 	}
 }

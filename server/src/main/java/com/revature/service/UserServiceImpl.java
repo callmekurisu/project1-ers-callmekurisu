@@ -39,6 +39,7 @@ public class UserServiceImpl implements UserService{
 		Users u = ud.findByUsernameAndPassword(cred.getUsername(), cred.getPassword());
 		if (u != null) {
 			session.setAttribute("role", u.getRole().getName());
+			session.setAttribute("id", u.getUserId());
 			return true;
 		} 
 		return false;

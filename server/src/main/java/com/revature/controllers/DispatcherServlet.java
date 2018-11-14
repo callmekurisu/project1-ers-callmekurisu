@@ -18,7 +18,7 @@ public class DispatcherServlet extends HttpServlet{
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-		resp.addHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+		resp.addHeader("Access-Control-Allow-Origin", "http://revature");
 		resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
 		resp.addHeader("Access-Control-Allow-Headers",
 				"Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
@@ -30,6 +30,8 @@ public class DispatcherServlet extends HttpServlet{
 		uri = uri.substring(context.length() + 1, uri.length());
 		log.debug("request made with uri: " + uri);
 		if (uri.startsWith("users")) {
+			uc.process(req, resp);
+		} else if (uri.equals("users/login")) {
 			uc.process(req, resp);
 		} else if (uri.startsWith("reimbs")) {
 			rc.process(req, resp);

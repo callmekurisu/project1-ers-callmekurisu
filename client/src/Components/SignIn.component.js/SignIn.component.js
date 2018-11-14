@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import ErsClient from '../../Axios/ErsClient';
 export class SignInComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -25,69 +25,78 @@ export class SignInComponent extends React.Component {
     })
   }
 
-  // submit = (e) => {
-  //   e.preventDefault();
-  //   let cred = this.state;
-  //   LeagueClient.post('users/login', cred)
-  //     .then(res => {
-  //         this.props.history.push('/view-champions');
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // }
+  submit = (e) => {
+    e.preventDefault();
+    let cred = this.state;
+    ErsClient.post('users/login', cred)
+      .then(res => {
+        if (res.status === 200){
+        this.props.history.push('/user');
+        }
+      })
+      .catch(err => {
+        window.location.assign('127.0.0.1/404')
+        console.log(err);
+      })
+  }
 
   render() {
     return (
-     
-      <div className="container" id="login-main">
-            <div className="row">
-            <div className="col-12 col-md-offset-3">
-              <div className="panel panel-login">
-                <div className="panel-heading">
-                  <div className="row">
-                    <div className="col-xs-6">
-                     <strong>Login to Revature ERS</strong> 
-                    </div>
-                  </div>
-                  <hr/>
-                </div>
-                <div className="panel-body">
-                  <div className="row">
-                    <div className="col-12">
-                      <form id="login-form"  method="post" >
-                        <div className="form-group ">
-                          <input type="text" name="username" id="username" tabindex="1" className="form-control" placeholder="Username" />
-                        </div>
-                        <div className="form-group">
-                          <input type="password" name="password" id="password" tabindex="2" className="form-control" placeholder="Password"/>
-                        </div>
-                        
-                        <div className="form-group">
-                          <div className="row">
-                            <div className=" col-xl col-lg col-sm-6 col-sm-offset-3">
-                              <input type="submit" name="login-submit" id="login-submit" tabindex="4" className="form-control btn btn-login" />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="form-group">
-                          <div className="row">
-                            <div className="col-lg-12">
-                              <p><Link to="/register"> New around here? Register 
-                              now!</Link></p>
-                            </div>
-                          </div>
-                        </div>
-                      </form>
 
-                      
-                    </div>
+      <div className="container" id="login-main">
+        <div className="row">
+          <div className="col-12 col-md-offset-3">
+            <div className="panel panel-login">
+              <div className="panel-heading">
+                <div className="row">
+                  <div className="col-xs-6">
+                    <h6><strong>Login to Revature ERS</strong></h6>
+                  </div>
+                </div>
+                <hr />
+              </div>
+              <div className="panel-body">
+                <div className="row">
+                  <div className="col-12">
+                    <form id="login-form"  onSubmit={this.submit}>
+
+                      <div className="form-group ">
+                        <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Username" required 
+                        onChange={this.usernameChange}/>
+                      </div>
+
+                      <div class="invalid-feedback">
+                        Please enter a username.
+                      </div>
+
+                      <div className="form-group">
+                        <input type="password" name="password" id="password" tabIndex="2" className="form-control" placeholder="Password" onChange={this.passwordChange} required />
+                      </div>
+
+                      <div className="form-group">
+                        <div className="row">
+                          <div className=" col-xl col-lg col-sm-6 col-sm-offset-3">
+                            <input type="submit" name="login-submit" id="login-submit" tabIndex="4" className="form-control btn btn-login" />
+                          </div>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <div className="row">
+                          <div className="col-lg-12">
+                            <h6><Link to="/register"> New here? Register!</Link></h6>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+
+
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
+      </div>
     )
   }
 }

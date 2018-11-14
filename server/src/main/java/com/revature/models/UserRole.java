@@ -3,7 +3,7 @@ package com.revature.models;
 public class UserRole {
 	private int id;
 	private String name;
-
+	
 	public UserRole() {
 		super();
 		// TODO Auto-generated constructor stub

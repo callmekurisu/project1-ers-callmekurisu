@@ -35,12 +35,13 @@ public class UserDaoJdbc implements UserDao{
 				"	reimb_submitted,\n" + 
 				"	reimb_resolved, \n" + 
 				"	reimb_description,\n" + 
+				"	reimb_resolver,\n" + 
 				"	reimb_status,\n" + 
 				"	reimb_type\n" + 
 				"FROM ERS_USERS\n" + 
 				"LEFT JOIN REIMBURSEMENT ON ERS_USERS.ERS_USERS_ID = REIMBURSEMENT.REIMB_AUTHOR\n" + 
 				"LEFT JOIN REIMBURSEMENT_STATUS ON REIMBURSEMENT.REIMB_STATUS_ID=REIMBURSEMENT_STATUS.REIMB_STATUS_ID\n" + 
-				"LEFT JOIN REIMBURSEMENT_TYPE ON REIMBURSEMENT.REIMB_TYPE_ID = REIMBURSEMENT_TYPE.REIMB_TYPE_ID\n" + 
+				"LEFT JOIN REIMBURSEMENT_TYPE ON REIMBURSEMENT.REIMB_TYPE_ID = REIMBURSEMENT_TYPE.REIMB_TYPE_ID\n WHERE REIMBURSEMENT.reimb_id > 0" + 
 				"ORDER BY ERS_USERS_ID " 
 				 
 			);
@@ -50,7 +51,7 @@ public class UserDaoJdbc implements UserDao{
 			List<Users> users = new ArrayList<>(); 
 				while(rs.next()){
 					users.add(new Users((rs.getInt("ers_users_id")),(rs.getString("ers_username")),null, (rs.getString("user_first_name")), rs.getString("user_last_name"), rs.getString("user_email"), 0,null, 
-							new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"), false, 0, 0, 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
+							new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"), false, 0, rs.getInt("reimb_resolver"), 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
 					}
 				return users;
 		} catch (SQLException e) {
@@ -108,14 +109,15 @@ public class UserDaoJdbc implements UserDao{
 	public Users findByUsernameAndPassword(String username, String password) {
 		try (Connection conn = ConnectionUtil.getConnection()) {
 			PreparedStatement ps = conn.prepareStatement(
-					"SELECT * FROM ers_users INNER JOIN user_roles"
-					+ "ON (ers_users.user_role_id = user_roles.ers_user_role_id) "
-					+ "WHERE username = ?  AND pass = ?");
+					"SELECT ers_users_id, ers_username, ers_password, user_role FROM ers_users \n" + 
+					"INNER JOIN user_roles ON (ers_users.user_role_id = user_roles.ers_user_role_id) \n" + 
+					"WHERE ers_username = ? AND ers_password = ? ");
 			ps.setString(1, username);
 			ps.setString(2, HashingUtil.hashword(password));//needs to match hash
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				//return extractFromResultSet(rs);
+				return new Users(rs.getInt("ers_users_id"), rs.getString("ers_username"), rs.getString("ers_password"),
+						null, null, null, 0, new UserRole(0, rs.getString("user_role")), null);
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -138,7 +140,8 @@ public class UserDaoJdbc implements UserDao{
 							"	reimb_amount,\n" + 
 							"	reimb_submitted,\n" + 
 							"	reimb_resolved, \n" + 
-							"	reimb_description,\n" + 
+							"	reimb_description,\n" +
+							"	reimb_resolver,\n" + 
 							"	reimb_status,\n" + 
 							"	reimb_type\n" + 
 							"FROM ERS_USERS\n" + 
@@ -153,7 +156,7 @@ public class UserDaoJdbc implements UserDao{
 			List<Users> users = new ArrayList<>(); 
 			while(rs.next()){
 				users.add(new Users((rs.getInt("ers_users_id")),(rs.getString("ers_username")),null, (rs.getString("user_first_name")), rs.getString("user_last_name"), rs.getString("user_email"), 0,null, 
-						new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), null, rs.getString("reimb_description"), false, 0, 0, 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
+						new Reimb(rs.getInt("reimb_id"), rs.getDouble("reimb_amount"), rs.getTimestamp("reimb_submitted"), rs.getTimestamp("reimb_resolved"), rs.getString("reimb_description"), false, 0, rs.getInt("reimb_resolver"), 0, 0, rs.getString("reimb_status"), rs.getString("reimb_type"))));
 				}
 			return users;
 			} catch (SQLException e) {

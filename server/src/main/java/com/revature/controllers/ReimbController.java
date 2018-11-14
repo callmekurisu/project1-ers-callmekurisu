@@ -49,6 +49,7 @@ public class ReimbController {
 			rs.save(r);
 			resp.getWriter().write("" + r.getAuthor());
 			resp.setStatus(201);
+			log.info("request saved ");
 			return;
 		}
 	}
