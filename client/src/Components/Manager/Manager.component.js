@@ -3,7 +3,7 @@ import ErsClient from '../../Axios/ErsClient';
 import time from '../../Include/time';
 import { FaCheckCircle } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
-
+import { FaSignOutAlt } from 'react-icons/fa';
 export class ManagerComponent extends React.Component {
  constructor(props){
    super(props);
@@ -25,17 +25,26 @@ export class ManagerComponent extends React.Component {
      })
     }
   
-    
+    logout = () => {
+      
+      ErsClient.post('users/logout')
+        .then(res => {
+          if (res.status === 200){
+            window.location.assign('/home')
+          }
+        })
+        .catch(err => {
+         window.location.assign('127.0.0.1/404')
+          console.log(err);
+        })
+      }
  
   render() {
     return (
         <div>
-          <div container  className="btns">
-          <button className="btn btn-primary"
-           >
-            View Pending Only
-          </button>
-          </div>
+          <span id="logout"><FaSignOutAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.logout}/>Logout</span>
+          <h4>Logged in as: Finance Manager</h4>
+          
             <>
         <hr />
           {this.state.reimbs.map((info, index) => (

@@ -12,10 +12,12 @@ export class AppNav extends React.PureComponent {
               <img className="img-adjust-position rev-logo" src={RevLogo} alt="revature" />
             </Link>
             </div>
-
+          
+          
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample04" aria-controls="navbarsExample04" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
+
           <div className="collapse navbar-collapse" id="navbarsExample04">
             <ul className="navbar-nav ml-auto margin-nav">
               <li className="nav-item active">
@@ -23,11 +25,11 @@ export class AppNav extends React.PureComponent {
               </li>
               
               <li className="nav-item active">
-                <Link to="/manager-sign-in" className="unset-anchor nav-link">Manager Sign In</Link>
+                <Link to="/manager-sign-in" className="unset-anchor nav-link">Manager Portal</Link>
               </li>
 
               <li className="nav-item active">
-                <Link to="/employee-sign-in" className="unset-anchor nav-link">Employee Sign In</Link>
+                <Link to="/employee-sign-in" className="unset-anchor nav-link">Employee Portal</Link>
               </li>
 
               <li className="nav-item active">

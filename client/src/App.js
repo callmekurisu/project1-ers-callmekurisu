@@ -1,3 +1,4 @@
+//re-direct port 3000 to 80 with iptables
 import React, { Component } from 'react';
 //import { Provider } from 'react-redux'; save for refactoring
 

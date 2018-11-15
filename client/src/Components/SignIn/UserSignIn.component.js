@@ -65,7 +65,7 @@ export class UserSignInComponent extends React.Component {
                         onChange={this.usernameChange}/>
                       </div>
 
-                      <div class="invalid-feedback">
+                      <div className="invalid-feedback">
                         Please enter a username.
                       </div>
 

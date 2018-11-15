@@ -62,20 +62,28 @@ public class UserController {
 				resp.setStatus(403);
 			}
 		} else if (uriArray.length == 2) {
-			try {
-				String role = (String) req.getSession().getAttribute("role");
-				String[] roleArr = role.split("-");
-				int userId = Integer.parseInt(roleArr[1]);
-				//int id = Integer.parseInt(uriArray[1]); postman testing
-				int id = userId;
-				log.info("retreiving data for user id: " + id);
-				List<Users> user = us.findById(id);
-				ResponseMapper.convertAndAttach(user, resp);
-				return;
-			} catch (NumberFormatException e) {
-				resp.setStatus(400);
-				return;
+			String role = (String) req.getSession().getAttribute("role");
+			String[] roleArr = role.split("-");
+			int userId = Integer.parseInt(roleArr[1]);
+			//int id = Integer.parseInt(uriArray[1]); postman testing
+			int id = userId;
+			
+			if ("employee".equals(roleArr[0])) {
+				try {
+				
+					log.info("retreiving data for user id: " + id);
+					List<Users> user = us.findById(id);
+					ResponseMapper.convertAndAttach(user, resp);
+					return;
+				} catch (NumberFormatException e) {
+					resp.setStatus(400);
+					return;
+				}
+			} else {
+				log.info("access denied");
+				resp.setStatus(403);
 			}
+			
 		} else {
 			resp.setStatus(404);
 		}
@@ -90,8 +98,8 @@ public class UserController {
 			log.info("saving new user");
 			Users u = om.readValue(req.getReader(), Users.class);
 			us.save(u);
-			resp.getWriter().write("" + u.getUserId());
-			resp.setStatus(201);
+			resp.setStatus(200);
+			log.info("saved new sucessfully");
 			return;
 		} else if ("users/login".equals(uri)) {
 			log.info("attempting to log in");
@@ -102,7 +110,13 @@ public class UserController {
 			} else if(us.login(cred, req.getSession())) {
 				log.info("login successful");
 			}
-		} else {
+			
+		} else if ("users/logout".equals(uri)) {
+			String role = (String) req.getSession().getAttribute("role");
+			req.getSession().invalidate();
+			resp.setStatus(200);
+			log.info(role + " logged out");
+		}else {
 			resp.setStatus(404);
 			return;
 		} 

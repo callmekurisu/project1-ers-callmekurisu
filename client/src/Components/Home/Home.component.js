@@ -1,11 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomeImg from '../../Assets/home-img.png';
+import {  } from 'react-icons/fa';
 export class HomeComponent extends React.Component {
   render() {
     return (
       <div className="Container">
-          <h1 ><strong>Revature  ERS</strong></h1>
+          <h1 ><strong>Revature ERS</strong></h1>
           <h6 ><strong>Employee Reimbursement System</strong></h6>
         
         

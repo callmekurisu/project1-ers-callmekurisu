@@ -86,4 +86,4 @@ INSERT INTO ers.reimbursement
 VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
 
 SELECT * FROM ERS_USERS;
-UPDATE ERS_USERS SET ers_password='3993215d55e0595828ea9c70f526dd213540c7ff1d' WHERE ers_username='jdepp';
+DELETE FROM ERS_USERS WHERE ers_users_id=7;
