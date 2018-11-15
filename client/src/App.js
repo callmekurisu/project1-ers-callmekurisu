@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import './Include/bootstrap';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { browserHistory } from 'react-router';
 import AppNav from './Components/Nav/Nav.component';
 import { HomeComponent } from './Components/Home/Home.component';
 import { SignInComponent } from './Components/SignIn/SignIn.component';
@@ -21,7 +22,7 @@ class App extends Component {
   render() {
     return (
       // <Provider store={store}>
-        <BrowserRouter>
+        <BrowserRouter history={browserHistory}>
           <>
             <AppNav />
             <div id="main-content-container">

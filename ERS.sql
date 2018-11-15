@@ -75,7 +75,7 @@ VALUES(1, 'lodging'),(2,'travel'),(3,'food'),(4,'other');
 --Initialize user table with manager and test account
 INSERT INTO ers.ers_users
 (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
-VALUES(1, 'nchristian', 'dfbcb73ed6874705af78bbb154c30662a81c8508245bf5fc7638e1d1f6393f63', 'nigel', 'christian', 'nchristian@gmail.com', 1);
+VALUES(1, 'nchristian', 'e4df62dcf00f1cf79a1a175375bc3dc281fde694f7', 'nigel', 'christian', 'nchristian@gmail.com', 1);
 /* example of plaintext password. Don't do this*/
 INSERT INTO ers.ers_users
 (ers_users_id, ers_username, ers_password, user_first_name, user_last_name, user_email, user_role_id)
@@ -86,4 +86,3 @@ INSERT INTO ers.reimbursement
 VALUES(1, 20, '2018-11-07', NULL, 'test reimbursement', false, 2, 1, 1, 1);
 
 SELECT * FROM ERS_USERS;
-DELETE FROM ERS_USERS WHERE ers_users_id=7;
