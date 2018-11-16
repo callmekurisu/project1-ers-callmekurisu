@@ -21,15 +21,15 @@ export class AppNav extends React.PureComponent {
           <div className="collapse navbar-collapse" id="navbarsExample04">
             <ul className="navbar-nav ml-auto margin-nav">
               <li className="nav-item active">
-                <Link to="/home" className="unset-anchor nav-link">Home</Link>
+                <Link to="/" className="unset-anchor nav-link">Home</Link>
               </li>
               
               <li className="nav-item active">
-                <Link to="/manager-sign-in" className="unset-anchor nav-link">Manager Portal</Link>
+                <Link to="/manager-sign-in" className="unset-anchor nav-link">Manager Access</Link>
               </li>
 
               <li className="nav-item active">
-                <Link to="/employee-sign-in" className="unset-anchor nav-link">Employee Portal</Link>
+                <Link to="/employee-sign-in" className="unset-anchor nav-link">Employee Access</Link>
               </li>
 
               <li className="nav-item active">

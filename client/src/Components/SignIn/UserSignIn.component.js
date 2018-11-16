@@ -35,7 +35,7 @@ export class UserSignInComponent extends React.Component {
         }
       })
       .catch(err => {
-       //window.location.assign('127.0.0.1/404')
+       window.location.assign('127.0.0.1/404')
         console.log(err);
       })
   }

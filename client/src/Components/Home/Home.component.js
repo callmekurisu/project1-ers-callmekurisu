@@ -14,11 +14,11 @@ export class HomeComponent extends React.Component {
          
           <br/>
           <Link to="/manager-sign-in">
-          <h6 >Manager Portal</h6>
+          <h6 >Manager Access</h6>
           </Link>
           <br /> 
           <Link to="/employee-sign-in">
-          <h6 >Employee Portal</h6>
+          <h6 >Employee Access</h6>
           </Link>
         </div>
         

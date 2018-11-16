@@ -1,28 +1,33 @@
 import React from 'react';
 import ErsClient from '../../Axios/ErsClient';
-import time from '../../Include/time';
-import { FaCheckCircle } from 'react-icons/fa';
-import { FaRegTimesCircle } from 'react-icons/fa';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { ApprovalComponent } from './Approval.component';
+
 export class ManagerComponent extends React.Component {
  constructor(props){
    super(props);
    this.state = {
-     reimbs: []
+     reimbs: [],
+     reimbId: 0,
+     statusId: 0
    }
  }
- 
+ //get data to display
  //watch out now! lexical this!
   componentDidMount(){
     ErsClient.get('users/')
       .then((response) => {
         console.log(`got ${response.data.length} reimbursements`)
-        this.setState({reimbs: response.data })
+        this.setState({
+          ...this.state,
+          reimbs: response.data 
+        })
     })
       
     .catch(err => {
       console.log(err);
      })
+    
     }
   
     logout = () => {
@@ -39,45 +44,58 @@ export class ManagerComponent extends React.Component {
         })
       }
  
+      approve = (rId) => (event) => {
+        let statusId = 2;
+        ErsClient.patch(`reimbs/${rId}/${statusId}`)
+        .then(res => {
+          if (res.status === 200){
+              //fallback to reload
+          }
+        })
+        .catch(err => {
+         window.location.assign('127.0.0.1/404')
+        })
+        window.setTimeout(()=>{//just waiting for the server 
+          window.location.reload()
+     },6000)
+    }
+
+    deny = (rId) => (event) => {
+      let statusId = 3;
+      ErsClient.patch(`reimbs/${rId}/${statusId}`)
+        .then(res => {
+          if (res.status === 200){
+              window.location.reload(true)
+          }
+        })
+        .catch(err => {
+         window.location.assign('127.0.0.1/404')
+        })
+
+        window.setTimeout(()=>{//just waiting for the server 
+          window.location.reload()
+     },6000)
+  }
   render() {
     return (
         <div>
           <span id="logout"><FaSignOutAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.logout}/>Logout</span>
           <h4>Logged in as: Finance Manager</h4>
-          
-            <>
+    <>
         <hr />
-          {this.state.reimbs.map((info, index) => (
-            <div className="col col-12 col-md-12 col-lg-12 reimb-col">
-            <div key={index} className="card reimb-card">
-            <ul className="list-group list-group-flush">
-            <li className="list-group-item"><strong>REVATURE ERS FORM v0.1B1810</strong></li>
-            <li  className="list-group-item">First Name: {info.firstName.toUpperCase()}</li>
-            <li  className="list-group-item flex-row-sb">Last Name: {info.lastName.toUpperCase()}</li>
-            <li  className="list-group-item flex-row-sb">Email: {info.email.toUpperCase()}</li>
-            <li  className="list-group-item flex-row-sb">Request #: {info.request.reimbId}</li>
-            <li  className="list-group-item flex-row-sb">Amount $: {info.request.amount}</li>
-            <li  className="list-group-item flex-row-sb">Submitted on: {time(info.request.submitted)}</li>
-            <li  className="list-group-item flex-row-sb">Description: {info.request.description.toUpperCase()}</li>
-            <li  className="list-group-item flex-row-sb">Type: {info.request.typeString.toUpperCase()}</li>
-            <li  className="list-group-item flex-row-sb">Status: {info.request.statusString.toUpperCase()}</li>
-            <li className="list-group-item flex-row-sb">
-            <div id ="approval" container> 
-            <FaCheckCircle className='pointer' style={{color: "green"}} size={50}/>
-            </div>
-            <div>
-            <FaRegTimesCircle className='pointer' style={{color: "red"}} size={50}/>
-            </div>
-            </li>
-            </ul>
-            </div>
-      
-      </div>
-          ))}
-         
-       
+          {
+            this.state.reimbs.map(info => 
+              <ApprovalComponent 
+                key={info.reimbId}
+                rID={info.reimbId}
+                info={info}
+                approve={this.approve}
+                deny={this.deny} />
+            )
+          }
     </>
         </div>
     )
   }
 }
+

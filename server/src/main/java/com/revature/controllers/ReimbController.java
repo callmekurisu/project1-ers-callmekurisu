@@ -64,18 +64,27 @@ public class ReimbController {
 		String[] uriArray = uri.split("/");
 		System.out.println(Arrays.toString(uriArray));
 		 if (uriArray.length == 3) {
-			try {
-				int rId = Integer.parseInt(uriArray[1]);
-				int statusId = Integer.parseInt(uriArray[2]);
-				log.info("updating remibursement id: " + rId + " to status: " + statusId);
-				rs.update(rId, statusId);
-				resp.setStatus(201);
-				log.info("update completed successfully");
-				return;
-			} catch (NumberFormatException e) {
-				resp.setStatus(400);
-				return;
-			}
+			 String role = (String) req.getSession().getAttribute("role");
+				String[] roleArr = role.split("-");
+				log.info(Arrays.toString(roleArr));
+				if ("manager".equals(roleArr[0])) {
+					try {
+						int rId = Integer.parseInt(uriArray[1]);
+						int statusId = Integer.parseInt(uriArray[2]);
+						log.info("updating remibursement id: " + rId + " to status: " + statusId);
+						rs.update(rId, statusId);
+						resp.setStatus(201);
+						log.info("update completed successfully");
+						return;
+					
+					} catch (NumberFormatException e) {
+							resp.setStatus(400);
+							return;
+					}
+				} else {
+					log.info("access denied");
+					resp.setStatus(403);
+				}
 		} else {
 			resp.setStatus(404);
 		}

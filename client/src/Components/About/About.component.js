@@ -3,6 +3,7 @@ import React from 'react';
 
 export class AboutComponent extends React.Component {
 
+
   render() {
     return (
         <div>
@@ -10,7 +11,6 @@ export class AboutComponent extends React.Component {
           rel="noopener noreferrer" >
           <img id="home-image" src="https://assets-cdn.github.com/images/modules/logos_page/Octocat.png" alt="Network, Connections, Communication, Digital, Internet"/></a>
         <h4>Developed with love by Nigel Christian</h4>
-        
         </div>
         
     )

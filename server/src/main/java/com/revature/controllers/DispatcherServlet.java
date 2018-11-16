@@ -20,7 +20,7 @@ public class DispatcherServlet extends HttpServlet{
 	
 		resp.addHeader("Access-Control-Allow-Origin", "http://localhost");
 		
-		resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE, HEAD");
+		resp.addHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PATCH, DELETE, HEAD");
 		resp.addHeader("Access-Control-Allow-Headers",
 				"Origin, Methods, Credentials, X-Requested-With, Content-Type, Accept");
 		resp.addHeader("Access-Control-Allow-Credentials", "true");
