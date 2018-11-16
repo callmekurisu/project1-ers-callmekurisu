@@ -17,7 +17,7 @@ phases:
             # if build succeeds copy the dist folder into the s3 bucket
             - |
                 if [ "$CODEBUILD_BUILD_SUCCEEDING" = "1" ]; then
-                    aws s3 cp /github.com/callmekurisu/project1-ers-callmekurisu/client/build/ s3://1810-redux-nchristian/ --recursive;
+                    aws s3 cp build/ --recursive;
                     echo "Build completed on date";
                 fi
 artifacts:
