@@ -14,13 +14,18 @@ function time(unix_timestamp){
     let seconds = "0" + date.getSeconds();
     let year =  date.getFullYear();
     let month = date.getMonth();
-    let day =  date.getDay();
+    let day =  date.getDate();
 
     // Will display time in 10:30:23 format
     let formattedTime = `${hours}:${minutes.substr(-2)}:${seconds.substr(-2)}`;
-    let formatDate = `${year}-${month+1}-${day+1}`
+    let formatDate = `${year}-${month+1}-${day}`
     let formattedDate = `${formatDate} - ${formattedTime}`
-    return formattedDate;
+    if(unix_timestamp > 0){
+        return formattedDate;
+    } else {
+        return 'TBD'
+    }
+    
 }
 
 

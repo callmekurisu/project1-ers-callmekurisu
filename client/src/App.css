@@ -170,7 +170,7 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
 
-#login-submit {
+.btn{
   background: #10818d;
   color: white;
   font-size: 18px;
@@ -260,6 +260,35 @@ Reimbursement Forms
   justify-content: flex-start;
   font-size: 16px;
   margin-bottom: 20px;
+}
+
+
+
+/*************************************************
+Reimbursement Form
+**************************************************/
+.center {
+  margin-top:50px;   
+}
+
+.modal-header {
+padding-bottom: 5px;
+}
+
+.modal-footer {
+    padding: 0;
+}
+  
+.modal-footer .btn-group button {
+height:40px;
+border-top-left-radius : 0;
+border-top-right-radius : 0;
+border: none;
+border-right: 1px solid #ddd;
+}
+
+.modal-footer .btn-group:last-child > button {
+border-right: 0;
 }
 
 #empbtn {

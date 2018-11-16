@@ -1,11 +1,10 @@
-//re-direct port 3000 to 80 with iptables
+//re-direct port 3000 to 80 with iptables to eliminate port use
 import React, { Component } from 'react';
 //import { Provider } from 'react-redux'; save for refactoring
 
 import './Include/bootstrap';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { browserHistory } from 'react-router';
 import AppNav from './Components/Nav/Nav.component';
 import { HomeComponent } from './Components/Home/Home.component';
 import { SignInComponent } from './Components/SignIn/SignIn.component';
@@ -22,7 +21,7 @@ class App extends Component {
   render() {
     return (
       // <Provider store={store}>
-        <BrowserRouter history={browserHistory}>
+        <BrowserRouter >
           <>
             <AppNav />
             <div id="main-content-container">

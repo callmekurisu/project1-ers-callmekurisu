@@ -2,6 +2,8 @@ import React from 'react';
 import ErsClient from '../../Axios/ErsClient';
 import time from '../../Include/time';
 import { FaSignOutAlt } from 'react-icons/fa';
+import { ReimbursementComponent } from './Reimbursement.component';
+
 export class UserComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -9,6 +11,7 @@ export class UserComponent extends React.Component {
       userName: '',
       reimbs: [],
       noData: ''
+      
     }
   }
 
@@ -18,21 +21,23 @@ export class UserComponent extends React.Component {
     //user id is fetched server side
     ErsClient.get('users/active')
       .then((response) => {
-        console.log(`got ${response.data.length} reimbursements`)
-        if (response.data.length > 1) {
+        
+        if (response.data[0].request.reimbId > 0) {
           this.setState({ 
-            ...this.state, 
+            ...this.state,
+            userName: response.data[0].username, 
             reimbs: response.data 
           })
          
         } else {
+          
           this.setState({
             ...this.state,
             userName: response.data[0].username,
             noData: "Create Your First Reimbursement"
           })
         }
-
+  
       })
 
       .catch(err => {
@@ -60,17 +65,11 @@ export class UserComponent extends React.Component {
       <div>
         
         <span id="logout"><FaSignOutAlt className='pointer' style={{ color: "grey" }} size={20} onClick={this.logout} />Logout</span><h4>Logged in as: {this.state.userName}</h4>
-        <div container id="empbtn">
-          
-          <button className="btn btn-primary">
-            Create New
-          </button>
-
-        </div>
         <>
           <hr />
+          <ReimbursementComponent/>
           <h6>{this.state.noData}</h6>
-          {this.state.reimbs.length > 1 &&
+          {this.state.noData === '' &&
             this.state.reimbs.map((info, index) => (
               <div className="col col-12 col-md-12 col-lg-12 reimb-col">
                 <div key={index} className="card reimb-card">
@@ -82,6 +81,7 @@ export class UserComponent extends React.Component {
                     <li className="list-group-item flex-row-sb">Request #: {info.request.reimbId}</li>
                     <li className="list-group-item flex-row-sb">Amount $: {info.request.amount}</li>
                     <li className="list-group-item flex-row-sb">Submitted on: {time(info.request.submitted)}</li>
+                    <li className="list-group-item flex-row-sb">Resolved on: {time(info.request.resolved)}</li>
                     <li className="list-group-item flex-row-sb">Description: {info.request.description.toUpperCase()}</li>
                     <li className="list-group-item flex-row-sb">Type: {info.request.typeString.toUpperCase()}</li>
                     <li className="list-group-item flex-row-sb">Status: {info.request.statusString.toUpperCase()}</li>
@@ -94,7 +94,7 @@ export class UserComponent extends React.Component {
               </div>
             ))
           }
-
+            
         </>
       </div>
     )
