@@ -6,7 +6,7 @@ const dev = {
    };
    
    const prod = {
-    context: ""
+    context: "http://1810projectonenchristian-env.cnjpzdjppr.us-west-2.elasticbeanstalk.com/"
    };
    
    export const environment = process.env.NODE_ENV === "production" ? prod : dev;
