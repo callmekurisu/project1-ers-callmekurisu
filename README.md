@@ -22,9 +22,9 @@
 * Front Controller (done)
     - User Controller
     - Reimb Controller
-* <b> Client side (in progress)</b>
+* Client side (done)
     - html, css, js
     - Login
     - Registration
     - User/Manger Dashboards
-    - React-Redux refactoring 
+    - React refactoring 
