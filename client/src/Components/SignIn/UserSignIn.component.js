@@ -38,6 +38,7 @@ export class UserSignInComponent extends React.Component {
        //window.location.assign('127.0.0.1/404')
         console.log(err);
       })
+      console.log("We are trying to hit the server")
   }
 
   render() {
