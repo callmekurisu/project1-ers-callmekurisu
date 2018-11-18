@@ -105,7 +105,7 @@ export class ReimbursementComponent extends React.Component {
     //show processing message to calm the user
     this.setState({
       ...this.state,
-      selection: Processing...
+      selection: 'Processing...'
     })
     //don't need selection
     delete info.selection;
