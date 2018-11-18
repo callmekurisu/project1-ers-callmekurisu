@@ -110,8 +110,8 @@ export class ReimbursementComponent extends React.Component {
       })
       .catch(err => {
         //redirect to 404 page if something goes wrong
-        window.location.assign('127.0.0.1/404')
-
+        //window.location.assign('127.0.0.1/404')
+        console.log("You broke it!")
       })
 
   }
@@ -191,13 +191,13 @@ export class ReimbursementComponent extends React.Component {
                   <br />
                   <h4>Entry: {this.state.selection}</h4>
 
-                  <div className="form-group">
+                  <div className="form-group" id="uploading">
                     {/* file upload handling */}
-                    <input type="file" name="receipt"
+                    <input type="file" name="receipt" enctype="multipart/form-data"
                     buttonAfter={this.uploadButton}
                     ref={(ref) => this.fileUpload = ref}/>
-                    <h4 className="help-block">Receipt upload currently disabled.</h4>
-                    <span id="logout"><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton}/></span>
+                    <h4 className="help-block"></h4>
+                    <FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} />
                   </div>
 
                   {/* logic to prevent blank form submission */}
