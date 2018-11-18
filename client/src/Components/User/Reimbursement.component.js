@@ -102,6 +102,11 @@ export class ReimbursementComponent extends React.Component {
     e.preventDefault();
     //don't mutate state!!!
     let info = Object.assign({}, this.state);
+    //show processing message to calm the user
+    this.setState({
+      ...this.state,
+      selection: Processing...
+    })
     //don't need selection
     delete info.selection;
     ErsClient.post('reimbs', info)
@@ -109,11 +114,6 @@ export class ReimbursementComponent extends React.Component {
         if (res.status === 200) {
           //delay to give time for refresh
           //fallback to refresh
-          //show processing message to calm the user
-          this.setState({
-            ...this.state,
-            selection: Processing...
-          })
         }
       })
       .catch(err => {
