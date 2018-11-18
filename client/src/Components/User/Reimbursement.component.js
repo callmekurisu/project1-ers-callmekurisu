@@ -1,5 +1,9 @@
 import React from 'react';
 import ErsClient from '../../Axios/ErsClient';
+import UploadClient from '../../Axios/UploadClient';
+import { FaCloudUploadAlt } from 'react-icons/fa';
+
+
 export class ReimbursementComponent extends React.Component {
   constructor(props) {
     super(props)
@@ -15,12 +19,12 @@ export class ReimbursementComponent extends React.Component {
       resolver: 1,
       status: 1,
       type: 4,
-      selection: ''
+      selection: '',
     }
 
   }
 
-
+ 
   componentDidMount() {
     //it doesn't matter what comes after that slash
     //user id is fetched server side
@@ -96,6 +100,21 @@ export class ReimbursementComponent extends React.Component {
   }
 
 
+  uploadButton = (e) => {
+    const file = this.fileUpload.files[0];
+    UploadClient.post('receipts', file)
+      .then(res => {
+        if (res.status === 200) {
+         console.log("upload successful")
+        }
+      })
+      .catch(err => {
+        //redirect to 404 page if something goes wrong
+        window.location.assign('127.0.0.1/404')
+
+      })
+
+  }
   //Ok!! lets send the data to the server now!!
 
   submit = (e) => {
@@ -142,8 +161,8 @@ export class ReimbursementComponent extends React.Component {
               <div className="modal-body">
 
 
-                <form>
-                  <div className="form-group">
+                <form enctype="multipart/form-data">
+                  <div className="form-group" >
                     <label >Amount</label>
                     <input type="text" className="form-control" id="amount" placeholder="Enter amount in decimal form"
                       onChange={this.amountChange} required />
@@ -173,10 +192,14 @@ export class ReimbursementComponent extends React.Component {
                   <h4>Entry: {this.state.selection}</h4>
 
                   <div className="form-group">
-
-                    <input type="file" id="receipt" />
+                    {/* file upload handling */}
+                    <input type="file" name="receipt"
+                    buttonAfter={this.uploadButton}
+                    ref={(ref) => this.fileUpload = ref}/>
                     <h4 className="help-block">Receipt upload currently disabled.</h4>
+                    <span id="logout"><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton}/></span>
                   </div>
+
                   {/* logic to prevent blank form submission */}
                   {this.state.amount !== '' && this.state.description !== '' &&
                   <button type="submit" className="btn btn-default"
