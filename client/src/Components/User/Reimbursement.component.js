@@ -109,15 +109,17 @@ export class ReimbursementComponent extends React.Component {
     UploadClient.post('receipts', formData)
       .then(res => {
         if (res.status === 200) {
-         console.log("upload successful")
+          this.setState({
+            ...this.state,
+            selection: 'File uploaded!'
+          })
         }
       })
       .catch(err => {
         //redirect to 404 page if something goes wrong
         //window.location.assign('127.0.0.1/404')
-        console.log("You broke it!")
       })
-
+      
   }
   //Ok!! lets send the data to the server now!!
 
@@ -201,7 +203,7 @@ export class ReimbursementComponent extends React.Component {
                     buttonAfter={this.uploadButton}
                     ref={(ref) => this.fileUpload = ref}/>
                     <h4 className="help-block"></h4>
-                    <FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} />
+                    <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} /></span>
                   </div>
 
                   {/* logic to prevent blank form submission */}
