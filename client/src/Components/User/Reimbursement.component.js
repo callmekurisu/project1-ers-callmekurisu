@@ -173,7 +173,7 @@ export class ReimbursementComponent extends React.Component {
                     <h4 className="help-block">Receipt upload currently disabled.</h4>
                   </div>
                   {/* logic to prevent blank form submission */}
-                  {this.state.amount !== '' && this.state.description !== &&
+                  {this.state.amount !== '' && this.state.description !== '' &&
                   <button type="submit" className="btn btn-default"
                     onClick={this.submit}>Submit</button>
                   }
