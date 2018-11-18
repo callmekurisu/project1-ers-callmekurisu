@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+
 import HomeImg from '../../Assets/home-img.png';
 
 export class HomeComponent extends React.Component {
