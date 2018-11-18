@@ -101,8 +101,12 @@ export class ReimbursementComponent extends React.Component {
 
 
   uploadButton = (e) => {
+    //build form data
+    const formData = new FormData();
     const file = this.fileUpload.files[0];
-    UploadClient.post('receipts', file)
+    formData.append("receipt", file);
+    
+    UploadClient.post('receipts', formData)
       .then(res => {
         if (res.status === 200) {
          console.log("upload successful")
