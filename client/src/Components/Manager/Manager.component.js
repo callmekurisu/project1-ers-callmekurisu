@@ -80,7 +80,9 @@ export class ManagerComponent extends React.Component {
     return (
         <div>
           <span id="logout"><FaSignOutAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.logout}/>Logout</span>
+          {this.state.reimbs.length > 0 &&
           <h4>Logged in as: Finance Manager</h4>
+          }
     <>
         <hr />
           {
