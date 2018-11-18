@@ -109,6 +109,11 @@ export class ReimbursementComponent extends React.Component {
         if (res.status === 200) {
           //delay to give time for refresh
           //fallback to refresh
+          //show processing message to calm the user
+          this.setState({
+            ...this.state,
+            selection: Processing...
+          })
         }
       })
       .catch(err => {
