@@ -70,7 +70,12 @@ public class ReimbDaoJdbc implements ReimbDao {
 			ps.setBoolean(6, false);//will go back and add receipt functionality
 			ps.setInt(7, r.getAuthor());
 			ps.setInt(8, findBoss());//pass in managers ID!
-			ps.setInt(9, 1);//status should always be one until updated by manager
+			//automate approval for Travel expenses less than $250
+			if (r.getAmount()<250&&r.getType()==2) {
+				ps.setInt(9, 2);
+			} else {
+				ps.setInt(9, 1);//status should always be one until updated by manager
+			}
 			ps.setInt(10, r.getType());
 			ps.executeUpdate();
 			
