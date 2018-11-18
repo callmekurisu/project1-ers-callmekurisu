@@ -37,7 +37,6 @@ export class ReimbursementComponent extends React.Component {
 
       .catch(err => {
         window.location.assign('127.0.0.1/404')
-        console.log(err);
       })
   }
   ///getting reimbursement form data now
@@ -126,6 +125,7 @@ export class ReimbursementComponent extends React.Component {
  
   render() {
     return (
+      // nothing too complicated, just a modal for the user to fill out
       <>
         <div className="center" id="empbtn"><button data-toggle="modal" data-target="#squarespaceModal" className="btn btn-primary center-block">Create New</button></div>
         <div className="modal fade" id="squarespaceModal" tabIndex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
@@ -169,7 +169,7 @@ export class ReimbursementComponent extends React.Component {
 
                   <div className="form-group">
 
-                    <input type="file" id="exampleInputFile" />
+                    <input type="file" id="receipt" />
                     <h4 className="help-block">Receipt upload currently disabled.</h4>
                   </div>
 

@@ -10,7 +10,7 @@ export class UserSignInComponent extends React.Component {
       password: ''
     }
   }
-
+// update state for fields as user types
   passwordChange = (e) => {
     this.setState({
       ...this.state,
@@ -24,7 +24,7 @@ export class UserSignInComponent extends React.Component {
       username: e.target.value
     })
   }
-
+  //if successful login push history to stack
   submit = (e) => {
     e.preventDefault();
     let cred = this.state;
@@ -35,10 +35,8 @@ export class UserSignInComponent extends React.Component {
         }
       })
       .catch(err => {
-       //window.location.assign('127.0.0.1/404')
-        console.log(err);
+       window.location.assign('127.0.0.1/404')
       })
-      console.log("We are trying to hit the server")
   }
 
   render() {

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import RevLogo from '../../Assets/rev-logo.png';
 
+// borrowing this nifty nav bar from Mr. Blake
 export class AppNav extends React.PureComponent {
   render() {
     return (

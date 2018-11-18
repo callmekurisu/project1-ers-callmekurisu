@@ -2,6 +2,7 @@ import React from 'react';
 import  FourOFourImg from '../../Assets/atl.png';
 import { Link } from 'react-router-dom';
 
+//you done messed up now!
 export class FourOFourComponent extends React.Component {
   render() {
     return (

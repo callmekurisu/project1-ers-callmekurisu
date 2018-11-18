@@ -1,5 +1,7 @@
 import React from 'react';
 import ErsClient from '../../Axios/ErsClient';
+
+//This is the manager component but I'm scared to change the name lol
 export class SignInComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -9,7 +11,7 @@ export class SignInComponent extends React.Component {
       password: ''
     }
   }
-
+  //update fields as user types
   passwordChange = (e) => {
     this.setState({
       ...this.state,
@@ -23,7 +25,7 @@ export class SignInComponent extends React.Component {
       username: e.target.value
     })
   }
-
+  //if success push history to stack
   submit = (e) => {
     e.preventDefault();
     let cred = this.state;
@@ -35,7 +37,6 @@ export class SignInComponent extends React.Component {
       })
       .catch(err => {
        window.location.assign('127.0.0.1/404')
-        console.log(err);
       })
   }
 

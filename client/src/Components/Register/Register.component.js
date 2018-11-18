@@ -16,7 +16,7 @@ constructor(props){
         registered: false
     }
 }
-
+//update state as user types for all fields
 firstNameChange = (e) => {
     this.setState({
       ...this.state,
@@ -48,7 +48,8 @@ firstNameChange = (e) => {
       password: e.target.value
     })
   }
-
+  //this field is cool! it just tells you if the passwords match
+  //you can still submit if they don't
   confirmPassword = (e) => {
       this.setState({
           ...this.state,
@@ -74,11 +75,7 @@ submit = (e) => {
           //redirect to 404 page if something goes wrong
           //no logic for unique user names yet
        window.location.assign('127.0.0.1/404')
-        console.log(err);
       })
-      //redirect to sign-in page after 3 seconds
-      
-    
     }
 
     render() {

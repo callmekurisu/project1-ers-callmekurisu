@@ -4,7 +4,7 @@ import { FaCheckCircle } from 'react-icons/fa';
 import { FaRegTimesCircle } from 'react-icons/fa';
 
 export class ApprovalComponent extends React.PureComponent {
-
+  // pure like filtered water! all state is handled in ManagerComponent and passes values as props
   render() {
     return (
         <div className="col col-12 col-md-12 col-lg-12 reimb-col">
@@ -14,7 +14,7 @@ export class ApprovalComponent extends React.PureComponent {
         <li  className="list-group-item">First Name: {this.props.info.firstName.toUpperCase()}</li>
         <li  className="list-group-item flex-row-sb">Last Name: {this.props.info.lastName.toUpperCase()}</li>
         <li  className="list-group-item flex-row-sb">Email: {this.props.info.email.toUpperCase()}</li>
-        <li className="list-group-item flex-row-sb">Request #: {this.props.info.request.reimbId}</li>
+        <li  className="list-group-item flex-row-sb">Request #: {this.props.info.request.reimbId}</li>
         <li  className="list-group-item flex-row-sb">Amount $: {this.props.info.request.amount}</li>
         <li  className="list-group-item flex-row-sb">Submitted on: {time(this.props.info.request.submitted)}</li>
         <li  className="list-group-item flex-row-sb">Resolved on: {time(this.props.info.request.resolved)}</li>

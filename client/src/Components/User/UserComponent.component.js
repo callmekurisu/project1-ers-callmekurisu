@@ -4,6 +4,7 @@ import time from '../../Include/time';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { ReimbursementComponent } from './Reimbursement.component';
 
+//this is the view for the logged in user
 export class UserComponent extends React.Component {
   constructor(props) {
     super(props);
@@ -25,7 +26,7 @@ export class UserComponent extends React.Component {
         if (response.data[0].request.reimbId > 0) {
           this.setState({ 
             ...this.state,
-            userName: response.data[0].username, 
+            userName: response.data[0].username, //this is how i get user name for logged in user
             reimbs: response.data 
           })
          
@@ -34,20 +35,19 @@ export class UserComponent extends React.Component {
           this.setState({
             ...this.state,
             userName: response.data[0].username,
-            noData: "Create Your First Reimbursement"
+            noData: "Create Your First Reimbursement"  //first time users see this
           })
         }
   
       })
-
+      //you did something bad like trying to navigate here without logging in
       .catch(err => {
         window.location.assign('127.0.0.1/404')
-        console.log(err);
       })
   }
 
   logout = () => {
-
+    //end session
     ErsClient.post('users/logout')
       .then(res => {
         if (res.status === 200) {
@@ -56,7 +56,6 @@ export class UserComponent extends React.Component {
       })
       .catch(err => {
         window.location.assign('127.0.0.1/404')
-        console.log(err);
       })
   }
 
@@ -67,8 +66,12 @@ export class UserComponent extends React.Component {
         <span id="logout"><FaSignOutAlt className='pointer' style={{ color: "grey" }} size={20} onClick={this.logout} />Logout</span><h4>Logged in as: {this.state.userName}</h4>
         <>
           <hr />
+          {/* Inject the reimbursement form */}
           <ReimbursementComponent/>
           <h6>{this.state.noData}</h6>
+          {/* checking that noData maintains initial state
+          seems confusing but if the user has no reimbursements
+          noData gets state set to a message saying to create a reimbursement */}
           {this.state.noData === '' &&
             this.state.reimbs.map((info, index) => (
               <div className="col col-12 col-md-12 col-lg-12 reimb-col">
