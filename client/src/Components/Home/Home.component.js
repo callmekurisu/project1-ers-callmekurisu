@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import HomeImg from '../../Assets/home-img.png';
-import {  } from 'react-icons/fa';
+
 export class HomeComponent extends React.Component {
   render() {
     return (
@@ -12,14 +12,7 @@ export class HomeComponent extends React.Component {
         
           <img id="home-image" src={HomeImg} alt="Network, Connections, Communication, Digital, Internet"/>
          
-          <br/>
-          <Link to="/manager-sign-in">
-          <h6 >Manager Access</h6>
-          </Link>
-          <br /> 
-          <Link to="/employee-sign-in">
-          <h6 >Employee Access</h6>
-          </Link>
+  
         </div>
         
     )
