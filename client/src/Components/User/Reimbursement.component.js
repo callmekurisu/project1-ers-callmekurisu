@@ -109,17 +109,17 @@ export class ReimbursementComponent extends React.Component {
     UploadClient.post('receipts', formData)
       .then(res => {
         if (res.status === 200) {
-          this.setState({
-            ...this.state,
-            selection: 'File uploaded!'
-          })
+          console.log("upload success!")
         }
       })
       .catch(err => {
         //redirect to 404 page if something goes wrong
-        //window.location.assign('127.0.0.1/404')
+        window.location.assign('127.0.0.1/404')
       })
-      
+      this.setState({
+        ...this.state,
+        selection: 'File uploaded!'
+      })
   }
   //Ok!! lets send the data to the server now!!
 
@@ -214,11 +214,6 @@ export class ReimbursementComponent extends React.Component {
 
                 </form>
 
-              </div>
-              <div className="modal-footer">
-                <div className="btn-group btn-group-justified" role="group" aria-label="group button">
-
-                </div>
               </div>
             </div>
           </div>
