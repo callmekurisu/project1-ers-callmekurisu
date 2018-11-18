@@ -298,5 +298,5 @@ border-right: 0;
 
 #uploading {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: left;
 }

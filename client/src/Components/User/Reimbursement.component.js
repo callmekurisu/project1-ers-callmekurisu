@@ -203,7 +203,11 @@ export class ReimbursementComponent extends React.Component {
                     buttonAfter={this.uploadButton}
                     ref={(ref) => this.fileUpload = ref}/>
                     <h4 className="help-block"></h4>
+                  {/* un-render button after submission 
+                  to prevent spamming image hosting service */}
+                  {  this.selection !== 'File uploaded!' &&
                     <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} /></span>
+                  }
                   </div>
 
                   {/* logic to prevent blank form submission */}
