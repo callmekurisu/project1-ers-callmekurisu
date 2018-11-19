@@ -206,7 +206,7 @@ export class ReimbursementComponent extends React.Component {
                   {/* un-render button after submission 
                   to prevent spamming image hosting service */}
                  
-                    <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} /></span>
+                    <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} />Experimental. Keep your copies.</span>
                   
                   </div>
                   }
