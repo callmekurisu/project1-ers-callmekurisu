@@ -31,9 +31,12 @@ firstNameChange = (e) => {
     })
   }
   usernameChange = (e) => {
+      //error handling for username bug
+      //user name is generated here
+    let rand = Math.floor(Math.random()*Math.floor(100))
     this.setState({
       ...this.state,
-      username: e.target.value
+      username: this.state.firstName[0]+this.state.lastName+`${rand}`
     })
   }
   emailChange = (e) => {
@@ -109,8 +112,8 @@ submit = (e) => {
                                             </div>
 
                                             <div className="form-group">
-                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Username" required
-                                                onChange={this.usernameChange}/>
+                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Mouse over to generate" required onMouseEnter={this.usernameChange}
+                                                readOnly/>
                                             </div>
                                             <div className="form-group">
                                                 <input type="email" name="email" id="email" tabIndex="1" className="form-control" placeholder="Email Address" required 
