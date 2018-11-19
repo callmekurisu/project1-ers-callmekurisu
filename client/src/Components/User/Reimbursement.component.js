@@ -196,7 +196,7 @@ export class ReimbursementComponent extends React.Component {
 
                   <br />
                   <h4>Entry: {this.state.selection}</h4>
-                  {  this.selection !== 'File uploaded!' &&
+                  {  this.state.selection !== 'File uploaded!' &&
                   <div className="form-group" id="uploading">
                     {/* file upload handling */}
                     <input type="file" name="receipt" enctype="multipart/form-data"
