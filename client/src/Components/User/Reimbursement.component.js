@@ -196,7 +196,10 @@ export class ReimbursementComponent extends React.Component {
 
                   <br />
                   <h4>Entry: {this.state.selection}</h4>
+                  <h4>Receipt upload is experimental</h4>
+                  <h4>Keep copies of your receipt</h4>
                   {  this.state.selection !== 'File uploaded!' &&
+                  this.state.selection !== 'Processing...' &&
                   <div className="form-group" id="uploading">
                     {/* file upload handling */}
                     <input type="file" name="receipt" enctype="multipart/form-data"
@@ -206,7 +209,7 @@ export class ReimbursementComponent extends React.Component {
                   {/* un-render button after submission 
                   to prevent spamming image hosting service */}
                  
-                    <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} />Experimental. Keep your copies.</span>
+                    <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} /></span>
                   
                   </div>
                   }
