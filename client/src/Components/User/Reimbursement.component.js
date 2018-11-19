@@ -196,7 +196,7 @@ export class ReimbursementComponent extends React.Component {
 
                   <br />
                   <h4>Entry: {this.state.selection}</h4>
-
+                  {  this.selection !== 'File uploaded!' &&
                   <div className="form-group" id="uploading">
                     {/* file upload handling */}
                     <input type="file" name="receipt" enctype="multipart/form-data"
@@ -205,12 +205,13 @@ export class ReimbursementComponent extends React.Component {
                     <h4 className="help-block"></h4>
                   {/* un-render button after submission 
                   to prevent spamming image hosting service */}
-                  {  this.selection !== 'File uploaded!' &&
+                 
                     <span><FaCloudUploadAlt className='pointer' style={{color: "grey"}} size={20} onClick={this.uploadButton} /></span>
-                  }
+                  
                   </div>
+                  }
 
-                  {/* logic to prevent blank form submission */}
+                    {/* logic to prevent blank form submission */}
                   {this.state.amount !== '' && this.state.description !== '' &&
                   <button type="submit" className="btn btn-default"
                     onClick={this.submit}>Submit</button>
