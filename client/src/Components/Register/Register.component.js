@@ -113,7 +113,7 @@ submit = (e) => {
 
                                             <div className="form-group">
                                                 <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Mouse over to generate" required onMouseEnter={this.usernameChange}
-                                                readOnly/>
+                                                readOnly>{this.state.username}</input>
                                             </div>
                                             <div className="form-group">
                                                 <input type="email" name="email" id="email" tabIndex="1" className="form-control" placeholder="Email Address" required 
