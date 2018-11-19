@@ -116,8 +116,8 @@ submit = (e) => {
                                             <div className="form-group">
                                                 <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Click to generate" required onMouseOver={this.usernameChange}
                                                 readOnly></input>
-                                                <h4>Remember your username: 
-                                                <strong>{this.state.username}</strong></h4>
+                                                <h4>Remember your username: </h4>
+                                                <h4><strong>{this.state.username}</strong></h4>
                                             </div>
                                             <div className="form-group">
                                                 <input type="email" name="email" id="email" tabIndex="1" className="form-control" placeholder="Email Address" required 
