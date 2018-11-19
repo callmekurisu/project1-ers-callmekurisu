@@ -114,7 +114,7 @@ submit = (e) => {
                                             </div>
 
                                             <div className="form-group">
-                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Mouse over to generate" required 
+                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Touch to generate" required 
                                                 onTouchStart={this.usernameChange}
                                                 onMouseOver={this.usernameChange}
                                                 readOnly></input>
