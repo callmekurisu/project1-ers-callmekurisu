@@ -34,8 +34,8 @@ firstNameChange = (e) => {
       //error handling for username bug
       //user name is generated here
     let rand = Math.floor(Math.random()*Math.floor(100))
-    let fi = this.state.firstName[0].toLowerCase
-    let last = this.state.lastName.toLowerCase
+    let fi = this.state.firstName[0].toLowerCase()
+    let last = this.state.lastName.toLowerCase()
     this.setState({
       ...this.state,
       username: fi+last+`${rand}`
@@ -114,7 +114,7 @@ submit = (e) => {
                                             </div>
 
                                             <div className="form-group">
-                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Mouse over and click to generate" required onMouseOver={this.usernameChange}
+                                                <input type="text" name="username" id="username" tabIndex="1" className="form-control" placeholder="Click to generate" required onMouseOver={this.usernameChange}
                                                 readOnly></input>
                                                 <h4>Remember your username: 
                                                 <strong>{this.state.username}</strong></h4>
