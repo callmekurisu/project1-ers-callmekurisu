@@ -109,17 +109,17 @@ export class ReimbursementComponent extends React.Component {
     UploadClient.post('receipts', formData)
       .then(res => {
         if (res.status === 200) {
-          console.log("upload success!")
+          this.setState({
+            ...this.state,
+            selection: 'File uploaded!'
+          })
         }
       })
       .catch(err => {
         //redirect to 404 page if something goes wrong
         window.location.assign('127.0.0.1/404')
       })
-      this.setState({
-        ...this.state,
-        selection: 'File uploaded!'
-      })
+      
   }
   //Ok!! lets send the data to the server now!!
 
